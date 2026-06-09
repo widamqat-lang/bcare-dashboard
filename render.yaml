@@ -1,15 +1,11 @@
 services:
   - type: web
     name: bcare-dashboard
-    env: static
+    env: node
     plan: free
     rootDir: artifacts/phishing-pages
     buildCommand: pnpm install && pnpm build
-    staticPublishPath: dist
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: public, max-age=0, must-revalidate
+    startCommand: npx serve dist -l $PORT
     envVars:
       - key: NODE_ENV
         value: production
